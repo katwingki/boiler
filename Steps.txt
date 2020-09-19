@@ -2,24 +2,53 @@ Boilermaker: a template for react
 /******************************** SET UP *********************************/
 1/mkdir <projectName>
 2/npm init, git init, .gitignore
-3/Create a new repositories on github, follow the commands, don't forget to
-> git add -A >git commit -m "initial setup"  to save all changes before following the directions:
+>>> git add -A >git commit -m "initial setup"  to save all changes before Step 3
+3/Create a new repositories on github:
 > git remote add origin https://github.com/katwingki/boilermaker.git
 > git branch -M master
 > git push -u origin master
 4/ "roots/public/index.html": define char set,mobile responsive, title, CSS, bundle.js make sure they are in the correct order.
+5/ "roots/public/style.css: Basic Styling
 
 /********************FRONTEND*************************/
 npm install --save-dev webpack webpack-cli @babel/core babel-loader @babel/preset-react
+**If you want to be proactive in making sure your code is safe for older browsers, you may also install @babel/preset-env.***
 
-npm install --save react react-dom react-router-dom
+npm install --save react react-dom react-router-dom react-redux
+
 1/ Create "client" folder
-2/ "~/client/index.js is the entry point for client JS
+2/ "~/client/index.js is the entry point for client JS webpack pipeline.
+3/ "/root/webpack.config.js" : By setting babel-loader in your webpack config, you're teaching webpack to use babel
+4/ "/root/.babelrc: tell babel how to parse our code
+5/ In your package.json, set up an npm start command (or some combination of other commands) to build your client javascript and run your server.
+
+/****Frontend-Redux******/
+npm install --save redux react-redux
+npm install --save redux-thunk redux-logger
+npm install redux-devtools-extension
+npm install axios
+1/Create "root/client/store" directory
+2/Reducer : 'root/client/store/user.js'
+3/Store-index.js : 'root/client/store/index.js'
+Use the connect function from react-redux to obtain slices of state and the dispatch method throughout your app.
+
+/***Frontend-CSS********/
+Webpack can build your css files into a single css file
+npm install --save-dev style-loader css-loader
+
+1/ Add the new loaders to your webpack config.
+2/ Import it to JS file 'roots/client/index.js'
+// assuming our index.scss is in the same directory as our index.js
+import './index.css';
+
+/***Frontend-Components***/
+Under 'root/client/compoenents'
+1/ index.js => central export for all components
 
 /*********************BACKEND************************/
 Set up express server if you are not using cloudbased
-npm install --save express
-npm install --save morgan
+npm install --save express morgan path compression express-session passport
+connect-session-sequelize socket.io
 
 
 1/ Create an entry point for your server: "~/server/index.js"
@@ -37,3 +66,6 @@ npm install --save sequelize pg pg-hstore
 1/Create a db file for each of the model under "root/server/db/models/XXX.js"
 2/Declare relationship on "root/server/db/models/index.js"
 3/Connecting with postgres on "root/server/db/db.js"
+
+/**********************Final Check***********************/
+Run npm start or npm run start-dev, depending on your naming convention! I

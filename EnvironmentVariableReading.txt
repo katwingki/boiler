@@ -1,0 +1,28 @@
+Using Your Environment
+As we transition into our server code, let's take a minute to review our usage of environment variables, and how we can leverage them in our server code.
+
+At this point, you're probably aware of the concept of global variables in your JavaScript environment. In the browser environment, this generally refers to the window object and anything attached to window. In the Node environment, this refers to objects like process and global.
+
+Environment variables are global variables in your operating system's environment (not just in your JavaScript environment). Your PATH is an example of this. From your terminal, if you type echo $PATH, then you should see the value of your PATH environment variable.
+
+To get a list of all of your environment variables, you can type the following command:
+
+printenv
+Environment variables are accessible to Node as well! To see how this works, start a Node repl by running the node command without any arguments.
+
+node
+From the node repl prompt, evaluate the following expression (using the environment variable of your choosing):
+
+> process.env.PATH
+The output should be the same as when you performed echo $PATH! Any variables in your environment are accessible to a node process!
+
+This is important for server development, because the machine you deploy your app to will have environment variables the same way your own local machine does. We can leverage these variables in several ways:
+
+We can hide secrets by setting them to be environment variables on our deployment server (instead of hard-coding them into our code, which will end up on Github!)
+We can take certain actions in our server process based on whether we're developing in our local environment, or running on the deployment server. By convention, we often use an environment variable called NODE_ENV to do this.
+We can set placeholders for values that will be set by the deployment service. For example, when you "provision" (set up) a Postgres database using Heroku Postgres, it will automatically create an environment variable called DATABASE_URL in your Heroku server's environment, which contains the address of our postgres database (when we're developing locally, this is usually "postgres://localhost:5432/yourdb").
+
+https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps
+
+
+https://devcenter.heroku.com/articles/config-vars
